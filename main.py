@@ -36,6 +36,16 @@ def deal_cards():
     return two_cards
 
 
+def you_win():
+    print('you win')
+    print(dealer_values)
+
+
+def you_lose():
+    print('you lose')
+    print(dealer_values)
+
+
 dealer = deal_cards()
 hand = deal_cards()
 
@@ -51,7 +61,6 @@ values = hand_values(hand, types_of_cards)
 dealer_values = hand_values(dealer, types_of_cards)
 print(hand)
 print(values)
-#print(deck)
 while not values >= 21:
     more = input('взять ещё карту? ')
     if more == 'да':
@@ -59,10 +68,16 @@ while not values >= 21:
         values = hand_values(hand, types_of_cards)
         print(hand)
         print(values)
+        if values > 21:
+            you_lose()
+            break
     elif more == 'нет':
-        if values > dealer_values and values <= 21:
-            print('you win')
+        if dealer_values > 21:
+            you_win()
+            break
+        elif 21 >= values > dealer_values:
+            you_win()
             break
         else:
-            print('you lose')
+            you_lose()
             break
